@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>更新物品</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>搜索物品</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">物品名称</ion-label>
+        <ion-input [(ngModel)]="itemName" placeholder="请输入物品名称"></ion-input>
+      </ion-item>
+      <ion-button expand="full" (click)="searchByName()" [disabled]="loading">搜索</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 确保 item 已经定义且非空 -->
+  <ion-card *ngIf="item.id">
+    <ion-card-header>
+      <ion-card-title>物品信息</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">物品名称</ion-label>
+        <ion-input [(ngModel)]="item.name" placeholder="物品名称"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">分类</ion-label>
+        <ion-input [(ngModel)]="item.category" placeholder="分类"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">数量</ion-label>
+        <ion-input [(ngModel)]="item.quantity" type="number" placeholder="数量"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">价格</ion-label>
+        <ion-input [(ngModel)]="item.price" type="number" placeholder="价格"></ion-input>
+      </ion-item>
+
+      <ion-button expand="full" (click)="updateItem()" [disabled]="loading">更新物品</ion-button>
+      <ion-button expand="full" (click)="deleteItem()" color="danger" [disabled]="loading">删除物品</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 错误消息显示 -->
+  <ion-text *ngIf="errorMessage" color="danger">
+    <p>{{ errorMessage }}</p>
+  </ion-text>
+</ion-content>

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>库存列表</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- 搜索框和搜索按钮放在页面顶部 -->
+  <div class="search-container">
+    <ion-item>
+      <ion-input [(ngModel)]="searchName" placeholder="搜索物品"></ion-input>
+    </ion-item>
+    <ion-button expand="full" (click)="searchItem()">搜索</ion-button>
+  </div>
+
+  <!-- 库存清单 -->
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      <ion-label>
+        <h2>{{ item.name }}</h2>
+        <p>{{ item.category }}</p>
+        <p>{{ item.stockStatus }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- 错误信息 -->
+  <ion-text *ngIf="errorMessage" color="danger">
+    <p>{{ errorMessage }}</p>
+  </ion-text>
+
+  <!-- 加载中的提示 -->
+  <ion-loading [isOpen]="loading" message="加载中..."></ion-loading>
+
+</ion-content>   

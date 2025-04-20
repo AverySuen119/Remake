@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>添加物品</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>物品信息</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form (ngSubmit)="addItem()">
+        <ion-item>
+          <ion-label position="floating">物品名称</ion-label>
+          <ion-input [(ngModel)]="newItem.name" name="name" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">分类</ion-label>
+          <ion-input [(ngModel)]="newItem.category" name="category" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">数量</ion-label>
+          <ion-input [(ngModel)]="newItem.quantity" name="quantity" type="number" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">价格</ion-label>
+          <ion-input [(ngModel)]="newItem.price" name="price" type="number"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">供应商</ion-label>
+          <ion-input [(ngModel)]="newItem.supplier" name="supplier"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">库存状态</ion-label>
+          <ion-input [(ngModel)]="newItem.stockStatus" name="stockStatus"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">备注</ion-label>
+          <ion-input [(ngModel)]="newItem.specialNote" name="specialNote"></ion-input>
+        </ion-item>
+
+        <ion-button expand="full" type="submit" [disabled]="loading">添加物品</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-divider></ion-divider>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>特色物品</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let item of featuredItems">
+          <ion-label>{{ item.name }} - {{ item.category }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
