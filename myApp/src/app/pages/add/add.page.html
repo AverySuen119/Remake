@@ -43,6 +43,11 @@
         </ion-item>
 
         <ion-item>
+          <ion-label>是否设置为特色</ion-label>
+          <ion-toggle [(ngModel)]="newItem.featured" name="featured"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
           <ion-label position="floating">备注</ion-label>
           <ion-input [(ngModel)]="newItem.specialNote" name="specialNote"></ion-input>
         </ion-item>
@@ -68,3 +73,4 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
+

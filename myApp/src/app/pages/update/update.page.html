@@ -1,58 +1,74 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>更新物品</ion-title>
+    <ion-title>更新 / 删除物品</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>搜索物品</ion-card-title>
-    </ion-card-header>
+<ion-content class="ion-padding">
 
-    <ion-card-content>
-      <ion-item>
-        <ion-label position="floating">物品名称</ion-label>
-        <ion-input [(ngModel)]="itemName" placeholder="请输入物品名称"></ion-input>
-      </ion-item>
-      <ion-button expand="full" (click)="searchByName()" [disabled]="loading">搜索</ion-button>
-    </ion-card-content>
-  </ion-card>
+  <!-- 搜索区域 -->
+  <ion-item>
+    <ion-input [(ngModel)]="itemName" placeholder="输入物品名称"></ion-input>
+  </ion-item>
+  <ion-button expand="block" (click)="searchByName()">搜索</ion-button>
 
-  <!-- 确保 item 已经定义且非空 -->
-  <ion-card *ngIf="item.id">
-    <ion-card-header>
-      <ion-card-title>物品信息</ion-card-title>
-    </ion-card-header>
+  <!-- 表单区域：仅在 item 存在时显示 -->
+  <div *ngIf="item">
 
-    <ion-card-content>
-      <ion-item>
-        <ion-label position="floating">物品名称</ion-label>
-        <ion-input [(ngModel)]="item.name" placeholder="物品名称"></ion-input>
-      </ion-item>
+    <ion-item>
+      <ion-label position="stacked">名称</ion-label>
+      <ion-input [(ngModel)]="item.name"></ion-input>
+    </ion-item>
 
-      <ion-item>
-        <ion-label position="floating">分类</ion-label>
-        <ion-input [(ngModel)]="item.category" placeholder="分类"></ion-input>
-      </ion-item>
+    <ion-item>
+      <ion-label position="stacked">分类</ion-label>
+      <ion-select [(ngModel)]="item.category">
+        <ion-select-option value="Electronics">Electronics</ion-select-option>
+        <ion-select-option value="Furniture">Furniture</ion-select-option>
+        <ion-select-option value="Clothing">Clothing</ion-select-option>
+        <ion-select-option value="Tools">Tools</ion-select-option>
+        <ion-select-option value="Miscellaneous">Miscellaneous</ion-select-option>
+      </ion-select>
+    </ion-item>
 
-      <ion-item>
-        <ion-label position="floating">数量</ion-label>
-        <ion-input [(ngModel)]="item.quantity" type="number" placeholder="数量"></ion-input>
-      </ion-item>
+    <ion-item>
+      <ion-label position="stacked">数量</ion-label>
+      <ion-input type="number" [(ngModel)]="item.quantity"></ion-input>
+    </ion-item>
 
-      <ion-item>
-        <ion-label position="floating">价格</ion-label>
-        <ion-input [(ngModel)]="item.price" type="number" placeholder="价格"></ion-input>
-      </ion-item>
+    <ion-item>
+      <ion-label position="stacked">价格</ion-label>
+      <ion-input type="number" [(ngModel)]="item.price"></ion-input>
+    </ion-item>
 
-      <ion-button expand="full" (click)="updateItem()" [disabled]="loading">更新物品</ion-button>
-      <ion-button expand="full" (click)="deleteItem()" color="danger" [disabled]="loading">删除物品</ion-button>
-    </ion-card-content>
-  </ion-card>
+    <ion-item>
+      <ion-label position="stacked">供货商</ion-label>
+      <ion-input [(ngModel)]="item.supplier"></ion-input>
+    </ion-item>
 
-  <!-- 错误消息显示 -->
-  <ion-text *ngIf="errorMessage" color="danger">
-    <p>{{ errorMessage }}</p>
-  </ion-text>
+    <ion-item>
+      <ion-label position="stacked">库存状态</ion-label>
+      <ion-select [(ngModel)]="item.stockStatus">
+        <ion-select-option value="In Stock">In Stock</ion-select-option>
+        <ion-select-option value="Low Stock">Low Stock</ion-select-option>
+        <ion-select-option value="Out of Stock">Out of Stock</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">是否推荐</ion-label>
+      <ion-toggle [(ngModel)]="item.featured"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">备注</ion-label>
+      <ion-textarea [(ngModel)]="item.specialNote"></ion-textarea>
+    </ion-item>
+
+    <!-- 操作按钮 -->
+    <ion-button expand="block" color="primary" (click)="updateItem()">更新</ion-button>
+    <ion-button expand="block" color="danger" (click)="deleteItem()">删除</ion-button>
+
+  </div>
+
 </ion-content>

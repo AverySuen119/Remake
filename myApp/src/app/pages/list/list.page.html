@@ -4,23 +4,29 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+
+  
 
   <!-- 搜索框和搜索按钮放在页面顶部 -->
   <div class="search-container">
     <ion-item>
-      <ion-input [(ngModel)]="searchName" placeholder="搜索物品"></ion-input>
+      <ion-input type="text" [(ngModel)]="searchName" placeholder="搜索物品"></ion-input>
     </ion-item>
     <ion-button expand="full" (click)="searchItem()">搜索</ion-button>
+  
   </div>
 
   <!-- 库存清单 -->
   <ion-list>
     <ion-item *ngFor="let item of items">
       <ion-label>
-        <h2>{{ item.name }}</h2>
+        <h2>{{ item.id }} {{ item.name }}</h2>
         <p>{{ item.category }}</p>
         <p>{{ item.stockStatus }}</p>
+        <p>{{ item.price  }}$</p>
+        <p>{{ item.featured }}</p>
+        <p>{{ item.supplier }}</p>
       </ion-label>
     </ion-item>
   </ion-list>
@@ -30,7 +36,5 @@
     <p>{{ errorMessage }}</p>
   </ion-text>
 
-  <!-- 加载中的提示 -->
-  <ion-loading [isOpen]="loading" message="加载中..."></ion-loading>
-
-</ion-content>   
+  <!-- 加载中提示建议以后使用 LoadingController 控制，不使用组件 -->
+</ion-content>

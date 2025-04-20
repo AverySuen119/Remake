@@ -18,13 +18,18 @@ export class ListPage implements OnInit {
   searchName: string = '';  // 用于存储搜索框输入的名称
   loading = false;  // 加载状态
   errorMessage: string = '';  // 错误信息
+  
+  constructor(private inventoryService: InventoryService) {
+    
+  }
 
-  constructor(private inventoryService: InventoryService) {}
+  
 
   ngOnInit() {
     this.loadAllItems();  // 初始化时加载所有商品
   }
 
+  
   // 加载所有商品数据
   loadAllItems() {
     this.loading = true;
@@ -41,37 +46,37 @@ export class ListPage implements OnInit {
       }
     });
   }
+  
+ // 搜索商品
+ searchItem() {
+  console.log('进入 searchItem 方法');  // 添加更多调试日志
+  console.log('搜索框触发');  // 添加调试日志，检查是否触发
 
-  // 搜索商品
-  searchItem() {
-    console.log('搜索框触发');  // 添加调试日志，检查是否触发
-
-    if (!this.searchName.trim()) {
-      console.log('搜索框为空，重新加载所有商品');
-      this.loadAllItems();  // 如果搜索框为空，重新加载所有商品
-      return;
-    }
-
-    this.loading = true;
-    this.errorMessage = '';  // 清除之前的错误信息
-
-    // 调用服务端搜索方法
-    this.inventoryService.getItemByName(this.searchName).subscribe({
-      next: (item: InventoryItem | undefined) => {
-        console.log('搜索结果:', item); // 打印搜索结果
-        if (item) {
-          this.items = [item];  // 如果找到商品，包装成数组
-        } else {
-          this.items = [];  // 如果没有找到商品，清空列表
-          this.errorMessage = '没有找到匹配的物品。';
-        }
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('搜索失败:', err); // 打印具体错误信息
-        this.loading = false;
-        this.errorMessage = '搜索失败，请稍后再试。';
-      }
-    });
+  if (!this.searchName.trim()) {
+    console.log('搜索框为空，重新加载所有商品');
+    this.loadAllItems();  // 如果搜索框为空，重新加载所有商品
+    return;
   }
-}
+
+  this.loading = true;
+  this.errorMessage = '';  // 清除之前的错误信息
+
+  // 调用服务端搜索方法
+  this.inventoryService.getItemByName(this.searchName).subscribe({
+    next: (item: InventoryItem | undefined) => {
+      console.log('搜索结果:', item); // 打印搜索结果
+      if (item) {
+        this.items = [item];  // 如果找到商品，包装成数组
+      } else {
+        this.items = [];  // 如果没有找到商品，清空列表
+        this.errorMessage = '没有找到匹配的物品。';
+      }
+      this.loading = false;
+    },
+    error: (err) => {
+      console.error('搜索失败:', err); // 打印具体错误信息
+      this.loading = false;
+      this.errorMessage = '搜索失败，请稍后再试。';
+    }
+  });
+}}

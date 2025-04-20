@@ -1,19 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { InventoryService } from 'src/app/services/inventory.service';
 import { InventoryItem } from 'src/app/models/inventory-item';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';  // 导入 CUSTOM_ELEMENTS_SCHEMA
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.page.html',
   styleUrls: ['./add.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],  // 引入所有必要的模块
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]  // 添加 CUSTOM_ELEMENTS_SCHEMA
+  imports: [IonicModule, CommonModule, FormsModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AddPage implements OnInit {
   newItem: InventoryItem = {
@@ -42,27 +41,29 @@ export class AddPage implements OnInit {
   }
 
   addItem() {
-    // 基本字段验证
     if (!this.newItem.name || !this.newItem.category || this.newItem.quantity <= 0) {
-      this.showToast('Please fill in all required fields.');
+      this.showToast('请填写所有必填项');
       return;
     }
 
-    // 调用服务并反馈
+    this.loading = true;
+
     this.inventoryService.addItem(this.newItem).subscribe({
       next: (item) => {
-        this.showToast('Item added successfully!');
+        this.showToast('添加成功！');
         this.router.navigate(['/tabs/list']);
+        this.loading = false;
       },
       error: () => {
-        this.showToast('Failed to add item.');
+        this.showToast('添加失败');
+        this.loading = false;
       }
     });
   }
 
   loadFeaturedItems() {
     this.inventoryService.getAllItems().subscribe(items => {
-      this.featuredItems = items.filter(item => item.featured === false);
+      this.featuredItems = items.filter(item => item.featured === true);
     });
   }
 

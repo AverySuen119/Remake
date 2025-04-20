@@ -1,7 +1,11 @@
-// src/app/tabs/tabs.page.ts
 import { Component } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
+import { 
+  IonTabs, 
+  IonTabBar, 
+  IonTabButton, 
+  IonIcon, 
+  IonLabel 
+} from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,6 +13,13 @@ import { CommonModule } from '@angular/common';
   selector: 'app-tabs',
   templateUrl: './tabs.page.html',
   styleUrls: ['./tabs.page.scss'],
-  imports: [IonicModule, RouterModule, CommonModule],
+  imports: [
+    IonTabs, 
+    IonTabBar, 
+    IonTabButton, 
+    IonIcon, 
+    IonLabel,
+    CommonModule
+  ],
 })
 export class TabsPage {}

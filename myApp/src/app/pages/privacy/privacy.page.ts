@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 
@@ -7,13 +7,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './privacy.page.html',
   styleUrls: ['./privacy.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule]
+  imports: [IonicModule, CommonModule],
 })
-export class PrivacyPage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class PrivacyPage {}

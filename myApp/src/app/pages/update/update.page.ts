@@ -4,28 +4,19 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InventoryItem } from 'src/app/models/inventory-item';
 import { InventoryService } from 'src/app/services/inventory.service';
+import { RouterModule } from '@angular/router'; // 加入 RouterModule
 
 @Component({
   selector: 'app-update',
   templateUrl: './update.page.html',
   styleUrls: ['./update.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, RouterModule]
 })
 export class UpdatePage {
 
   itemName = '';
-  item: InventoryItem = {
-    id: 0,
-    name: '',
-    category: '',
-    quantity: 0,
-    price: 0,
-    stockStatus: '', // 添加缺失字段
-    featured: false, // 添加缺失字段
-    specialNote: '', // 添加缺失字段
-    supplier: '' // 添加缺失字段
-  };  // 默认初始化
+  item: InventoryItem | null = null;
 
   loading = false;
   errorMessage: string | null = null;
@@ -36,59 +27,49 @@ export class UpdatePage {
   ) {}
 
   searchByName() {
+    if (!this.itemName.trim()) {
+      this.showToast('请输入物品名称');
+      return;
+    }
+
     this.loading = true;
-    this.inventoryService.getAllItems().subscribe(items => {
-      // 在这里确保 item 符合 InventoryItem 类型
-      this.item = items.find(i => i.name.toLowerCase() === this.itemName.toLowerCase()) || {
-        id: 0,
-        name: '',
-        category: '',
-        quantity: 0,
-        price: 0,
-        stockStatus: '',
-        featured: false,
-        specialNote: '',
-        supplier: ''
-      };
-      if (!this.item.id) {
-        this.showToast('Item not found.');
+    this.inventoryService.getItemByName(this.itemName.trim()).subscribe({
+      next: (result) => {
+        if (result) {
+          this.item = result;
+        } else {
+          this.item = null;
+          this.showToast('未找到该物品');
+        }
+        this.loading = false;
+      },
+      error: () => {
+        this.item = null;
+        this.showToast('搜索失败，请稍后再试');
+        this.loading = false;
       }
-      this.loading = false;
-    }, () => {
-      this.showToast('Failed to search for the item.');
-      this.loading = false;
     });
   }
 
   updateItem() {
-    if (!this.item || !this.item.id) return;
+    if (!this.item || !this.item.name) return;
 
     this.inventoryService.updateItem(this.item.id, this.item).subscribe({
-      next: () => this.showToast('Item updated successfully!'),
-      error: () => this.showToast('Failed to update item.')
+      next: () => this.showToast('更新成功'),
+      error: () => this.showToast('更新失败')
     });
   }
 
   deleteItem() {
-    if (!this.item || !this.item.id) return;
+    if (!this.item || !this.item.name) return;
 
     this.inventoryService.deleteItem(this.item.id).subscribe({
       next: () => {
-        this.showToast('Item deleted successfully!');
-        this.item = {
-          id: 0,
-          name: '',
-          category: '',
-          quantity: 0,
-          price: 0,
-          stockStatus: '',
-          featured: false,
-          specialNote: '',
-          supplier: ''
-        };  // 重置 item
+        this.showToast('删除成功');
+        this.item = null;
         this.itemName = '';
       },
-      error: () => this.showToast('Failed to delete item.')
+      error: () => this.showToast('删除失败')
     });
   }
 
