@@ -23,9 +23,9 @@ export class HelpButtonComponent {
 
   async showHelp() {
     const alert = await this.alertController.create({
-      header: '帮助信息',
+      header: 'Help Information',
       message: this.helpContent,
-      buttons: ['我知道了']
+      buttons: ['Got it!']
     });
     await alert.present();
   }
