@@ -1,36 +1,70 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>库存列表</ion-title>
+    <ion-title>InventoryList</ion-title>
+    <ion-buttons slot="end">
+      <!-- 添加这行代码 -->
+      <app-help-button 
+  [helpContent]="`
+    Inventory list usage instructions
+
+Search function: Enter the item name in the top search box to find it accurately
+Reset search: Clear the search box and click the search button to display all items
+Data refresh: Pull down the page to refresh the inventory data
+View details: Click on the item to view detailed information
+Tip: The system automatically updates the status label according to the inventory
+  `"
+  [isHtml]="true">
+</app-help-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
   
-
   <!-- 搜索框和搜索按钮放在页面顶部 -->
   <div class="search-container">
     <ion-item>
-      <ion-input type="text" [(ngModel)]="searchName" placeholder="搜索物品"></ion-input>
+      <ion-input type="text" [(ngModel)]="searchName" placeholder="Search item"></ion-input>
     </ion-item>
-    <ion-button expand="full" (click)="searchItem()">搜索</ion-button>
+    <ion-button expand="full" (click)="searchItem()">Search</ion-button>
   
   </div>
 
   <!-- 库存清单 -->
   <ion-list>
     <ion-item *ngFor="let item of items">
-      <ion-label>
-        <h2>{{ item.id }} {{ item.name }}</h2>
-        <p>{{ item.category }}</p>
-        <p>{{ item.stockStatus }}</p>
-        <p>{{ item.price  }}$</p>
-        <p>{{ item.featured }}</p>
-        <p>{{ item.supplier }}</p>
-      </ion-label>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ item.name }}</ion-card-title>
+          <ion-card-subtitle>{{ item.category }}</ion-card-subtitle>
+        </ion-card-header>
+  
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="4">
+                <p><strong>ID:</strong> {{ item.id }}</p>
+              </ion-col>
+              <ion-col size="4">
+                <p><strong>Price:</strong> ${{ item.price }}</p>
+              </ion-col>
+              <ion-col size="4">
+                <p><strong>Stock Status:</strong> {{ item.stockStatus }}</p>
+              </ion-col>
+              <ion-col size="4">
+                <p><strong>Featured:</strong> {{ item.featured ? ' Yes' : ' No' }}</p>
+              </ion-col>
+              <ion-col size="4">
+                <p><strong>Supplier:</strong> {{ item.supplier }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
     </ion-item>
   </ion-list>
-
+  
   <!-- 错误信息 -->
   <ion-text *ngIf="errorMessage" color="danger">
     <p>{{ errorMessage }}</p>

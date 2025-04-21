@@ -5,13 +5,15 @@ import { InventoryItem } from 'src/app/models/inventory-item';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // 为 ngModel 提供支持
 import { RouterModule } from '@angular/router'; // 为 routerLink 提供支持
+import { HelpButtonComponent } from 'src/app/help-button/help-button.component';
+
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.page.html',
   styleUrls: ['./list.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterModule]
+  imports: [IonicModule, CommonModule, FormsModule, RouterModule,HelpButtonComponent],
 })
 export class ListPage implements OnInit {
   items: InventoryItem[] = [];  // 用于存储所有商品

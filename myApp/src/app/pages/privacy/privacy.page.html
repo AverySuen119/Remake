@@ -1,30 +1,93 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>隐私与安全政策</ion-title>
+  <ion-toolbar class="custom-toolbar">
+    <ion-title>Privacy Security and Help Policy</ion-title>
+    <ion-buttons slot="end">
+      <!-- 添加这行代码 -->
+      <app-help-button 
+  [helpContent]="`
+    Privacy and security instructions
+Data storage: All inventory data is encrypted and stored in the cloud server with permission control
+Only authorized accounts can modify data Operation log: The system records all add/modify/delete operations
+Data backup: Automatically back up data at 3 am every day
+
+If you have any questions, please contact: support@inventory.com
+  `"
+  [isHtml]="true">
+</app-help-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-card>
+
+  <!-- Data Privacy Explanation Card -->
+  <ion-card class="privacy-card">
     <ion-card-header>
-      <ion-card-title>数据隐私说明</ion-card-title>
+      <ion-card-title>Data Privacy Statement</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p>我们重视您的数据隐私，所有信息仅用于库存管理。</p>
-      <p>不会收集或共享任何用户敏感信息。</p>
+      <p>We value your data privacy, and all information is only used for inventory management purposes.</p>
+      <p>We do not collect or share any sensitive user information, such as personal identification documents, passwords, etc.</p>
+      <p>By using our system, you consent to the collection and processing of your inventory management data.</p>
+      <p>We will ensure the security of your data and implement strict measures to prevent unauthorized access.</p>
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <!-- User Rights Card -->
+  <ion-card class="privacy-card">
     <ion-card-header>
-      <ion-card-title>安全措施</ion-card-title>
+      <ion-card-title>User Rights</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>You have the right to access, update, or delete the personal information we store about you.</p>
+      <p>If you find any information inaccurate or wish to update your personal data, please contact us.</p>
+      <p>We are committed to responding to your requests in a timely manner, in compliance with relevant laws and regulations.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Security Measures Card -->
+  <ion-card class="privacy-card">
+    <ion-card-header>
+      <ion-card-title>Security Measures</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ul>
-        <li>所有数据传输都经过加密。</li>
-        <li>更新与删除操作提供确认提示。</li>
-        <li>系统定期清理无效数据。</li>
+        <li>All data transmissions are encrypted to ensure data is not leaked during transmission.</li>
+        <li>Update and deletion operations provide confirmation prompts to avoid risks from accidental actions.</li>
+        <li>The system regularly cleans invalid data to reduce potential security risks.</li>
+        <li>We use firewalls and antivirus software to protect your data from malicious attacks.</li>
+        <li>All user passwords are stored in an encrypted form to prevent data leaks from plaintext storage.</li>
       </ul>
     </ion-card-content>
   </ion-card>
+
+  <!-- Personal Information Protection Card -->
+  <ion-card class="privacy-card">
+    <ion-card-header>
+      <ion-card-title>Personal Information Protection</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>We are committed to protecting your personal information to prevent any unauthorized access or leakage.</p>
+      <p>All user data is only used within this platform, with strict access controls in place.</p>
+      <p>We will take all necessary technical and management measures to ensure the security of your information.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Help and Support Card -->
+  <ion-card class="privacy-card">
+    <ion-card-header>
+      <ion-card-title>Help and Support</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>If you have any questions, issues, or need assistance, please refer to the following resources:</p>
+      <ul>
+        <li><strong>Email:</strong> supportyourcompany.com</li>
+        <li><strong>Phone:</strong> 119 221 3578</li>
+        <li><strong>Help Center:</strong> Visit our Help Center at for FAQs, guides, and troubleshooting.</li>
+        <li><strong>Live Chat:</strong> If you need real-time assistance, you can reach us via the live chat feature on our website or app.</li>
+        <li><strong>Address:</strong> 1234 Abby Road</li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

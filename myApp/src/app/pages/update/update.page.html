@@ -1,6 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>更新 / 删除物品</ion-title>
+    <ion-title>Update Item</ion-title>
+    <ion-buttons slot="end">
+  
+      <app-help-button 
+  [helpContent]="`
+    Find an item: Enter the full name to search for the item to be modified
+Data modification: Edit the field and click the Update button to save
+Delete an item: Click the Delete button to remove the item (the system retains the Laptop example)
+Inventory warning: When the quantity is less than 5 pieces, it is recommended to replenish the inventory
+
+⚠️ The deletion operation cannot be undone, please operate with caution!
+  `"
+  [isHtml]="true">
+</app-help-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -8,20 +22,20 @@
 
   <!-- 搜索区域 -->
   <ion-item>
-    <ion-input [(ngModel)]="itemName" placeholder="输入物品名称"></ion-input>
+    <ion-input [(ngModel)]="itemName" placeholder="Enter the name "></ion-input>
   </ion-item>
-  <ion-button expand="block" (click)="searchByName()">搜索</ion-button>
+  <ion-button expand="block" (click)="searchByName()">Search</ion-button>
 
   <!-- 表单区域：仅在 item 存在时显示 -->
   <div *ngIf="item">
 
     <ion-item>
-      <ion-label position="stacked">名称</ion-label>
+      <ion-label position="stacked">Name</ion-label>
       <ion-input [(ngModel)]="item.name"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">分类</ion-label>
+      <ion-label position="stacked">Category</ion-label>
       <ion-select [(ngModel)]="item.category">
         <ion-select-option value="Electronics">Electronics</ion-select-option>
         <ion-select-option value="Furniture">Furniture</ion-select-option>
@@ -32,22 +46,22 @@
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">数量</ion-label>
+      <ion-label position="stacked">Amount</ion-label>
       <ion-input type="number" [(ngModel)]="item.quantity"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">价格</ion-label>
+      <ion-label position="stacked">Rrice</ion-label>
       <ion-input type="number" [(ngModel)]="item.price"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">供货商</ion-label>
+      <ion-label position="stacked">supplier</ion-label>
       <ion-input [(ngModel)]="item.supplier"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">库存状态</ion-label>
+      <ion-label position="stacked">Stock status</ion-label>
       <ion-select [(ngModel)]="item.stockStatus">
         <ion-select-option value="In Stock">In Stock</ion-select-option>
         <ion-select-option value="Low Stock">Low Stock</ion-select-option>
@@ -56,18 +70,18 @@
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">是否推荐</ion-label>
+      <ion-label position="stacked">Featured</ion-label>
       <ion-toggle [(ngModel)]="item.featured"></ion-toggle>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">备注</ion-label>
+      <ion-label position="stacked">SpecialNote</ion-label>
       <ion-textarea [(ngModel)]="item.specialNote"></ion-textarea>
     </ion-item>
 
     <!-- 操作按钮 -->
-    <ion-button expand="block" color="primary" (click)="updateItem()">更新</ion-button>
-    <ion-button expand="block" color="danger" (click)="deleteItem()">删除</ion-button>
+    <ion-button expand="block" color="primary" (click)="updateItem()">Update</ion-button>
+    <ion-button expand="block" color="danger" (click)="deleteItem()">Delete</ion-button>
 
   </div>
 

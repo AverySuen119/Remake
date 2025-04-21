@@ -1,0 +1,23 @@
+/* 全局背景色 */
+body {
+    background-color: #f7f7f7; /* 浅灰色背景 */
+  }
+  
+  /* 样式调整：输入框、选择框、按钮的样式 */
+  ion-item {
+    --background: transparent;
+    --border-color: #cce5ff; /* 边框颜色 */
+  }
+  
+  ion-label {
+    font-weight: bold;
+  }
+  
+  ion-button {
+    --border-radius: 8px;
+  }
+  
+  ion-select {
+    --border-radius: 8px;
+  }
+  

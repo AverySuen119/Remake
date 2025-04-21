@@ -5,13 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { InventoryItem } from 'src/app/models/inventory-item';
 import { InventoryService } from 'src/app/services/inventory.service';
 import { RouterModule } from '@angular/router'; // 加入 RouterModule
+import { HelpButtonComponent } from 'src/app/help-button/help-button.component';
 
 @Component({
   selector: 'app-update',
   templateUrl: './update.page.html',
   styleUrls: ['./update.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterModule]
+  imports: [IonicModule, CommonModule, FormsModule, RouterModule, HelpButtonComponent]
 })
 export class UpdatePage {
 
@@ -53,9 +54,13 @@ export class UpdatePage {
 
   updateItem() {
     if (!this.item || !this.item.name) return;
-
+  
     this.inventoryService.updateItem(this.item.id, this.item).subscribe({
-      next: () => this.showToast('更新成功'),
+      next: () => {
+        this.showToast('更新成功');
+        this.item = null;        // 清空物品信息
+        this.itemName = '';      // 清空物品名称输入框
+      },
       error: () => this.showToast('更新失败')
     });
   }

@@ -1,1 +1,33 @@
 
+/* 自定义 ion-tab-bar 样式 */
+.custom-tab-bar {
+    --background: #007bff; /* 设置蓝色背景 */
+    --color-selected: white; /* 选中的标签文字颜色 */
+    --color: #cce5ff; /* 未选中标签文字颜色 */
+    --border-color: transparent; /* 去掉底部边框 */
+    --indicator-color: white; /* 选中的标签下方的指示条颜色 */
+  }
+  
+  /* 自定义 tab-button 样式 */
+  ion-tab-button {
+    --background: transparent; /* 取消背景色 */
+    --color: #cce5ff; /* 默认未选中的文字颜色 */
+    --color-activated: white; /* 选中后的文字颜色 */
+  }
+  
+  /* 自定义 tab-icon 样式 */
+  .tab-icon {
+    --color: #cce5ff; /* 图标的颜色 */
+  }
+  
+  /* 在选中时改变 tab-icon 颜色 */
+  ion-tab-button.activated .tab-icon {
+    --color: white; /* 选中时的图标颜色 */
+  }
+  
+  /* 可选：自定义标签文字的样式 */
+  ion-label {
+    font-weight: bold; /* 文字加粗 */
+    font-size: 14px;
+  }
+  

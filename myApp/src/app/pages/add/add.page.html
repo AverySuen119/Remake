@@ -1,76 +1,119 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>添加物品</ion-title>
+    <ion-title>Add Item</ion-title>
+    <ion-buttons slot="end">
+      <app-help-button 
+        [helpContent]="`
+          Guide to adding new items
+
+          Required fields: Fields with * are required
+          Category selection: Select the correct category from the drop-down menu
+          Stock status: The system will automatically calculate based on the quantity, and can also be adjusted manually
+          Featured products: Turn on the switch to mark the item as a featured recommendation
+
+          <!> Note: The item name cannot be repeated with existing inventory!!!!
+        `"
+        [isHtml]="true">
+      </app-help-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>物品信息</ion-card-title>
+      <ion-card-title>Item Information</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
       <form (ngSubmit)="addItem()">
+        <!-- Item ID Input -->
         <ion-item>
-          <ion-label position="floating">物品名称</ion-label>
+          <ion-label position="floating">Item ID</ion-label>
+          <ion-input [(ngModel)]="newItem.id" name="id" type="number" required></ion-input>
+        </ion-item>
+
+        <!-- Item Name Input -->
+        <ion-item>
+          <ion-label position="floating">Item Name</ion-label>
           <ion-input [(ngModel)]="newItem.name" name="name" required></ion-input>
         </ion-item>
 
+        <!-- Category Dropdown -->
         <ion-item>
-          <ion-label position="floating">分类</ion-label>
-          <ion-input [(ngModel)]="newItem.category" name="category" required></ion-input>
+          <ion-label position="floating">Category</ion-label>
+          <ion-select [(ngModel)]="newItem.category" name="category" required>
+            <ion-select-option *ngFor="let category of categories" [value]="category">
+              {{ category }}
+            </ion-select-option>
+          </ion-select>
         </ion-item>
 
+        <!-- Quantity Input -->
         <ion-item>
-          <ion-label position="floating">数量</ion-label>
+          <ion-label position="floating">Quantity</ion-label>
           <ion-input [(ngModel)]="newItem.quantity" name="quantity" type="number" required></ion-input>
         </ion-item>
 
+        <!-- Price Input -->
         <ion-item>
-          <ion-label position="floating">价格</ion-label>
+          <ion-label position="floating">Price</ion-label>
           <ion-input [(ngModel)]="newItem.price" name="price" type="number"></ion-input>
         </ion-item>
 
+        <!-- Supplier Input -->
         <ion-item>
-          <ion-label position="floating">供应商</ion-label>
+          <ion-label position="floating">Supplier</ion-label>
           <ion-input [(ngModel)]="newItem.supplier" name="supplier"></ion-input>
         </ion-item>
 
+        <!-- Stock Status Dropdown -->
         <ion-item>
-          <ion-label position="floating">库存状态</ion-label>
-          <ion-input [(ngModel)]="newItem.stockStatus" name="stockStatus"></ion-input>
+          <ion-label position="floating">Stock Status</ion-label>
+          <ion-select [(ngModel)]="newItem.stockStatus" name="stockStatus">
+            <ion-select-option *ngFor="let status of stockStatuses" [value]="status">
+              {{ status }}
+            </ion-select-option>
+          </ion-select>
         </ion-item>
 
+        <!-- Special Note Input -->
         <ion-item>
-          <ion-label>是否设置为特色</ion-label>
-          <ion-toggle [(ngModel)]="newItem.featured" name="featured"></ion-toggle>
-        </ion-item>
-
-        <ion-item>
-          <ion-label position="floating">备注</ion-label>
+          <ion-label position="floating">Special Note*</ion-label>
           <ion-input [(ngModel)]="newItem.specialNote" name="specialNote"></ion-input>
         </ion-item>
 
-        <ion-button expand="full" type="submit" [disabled]="loading">添加物品</ion-button>
+        <!-- Featured Item Switch -->
+        <ion-item>
+          <ion-label>Featured</ion-label>
+          <ion-toggle [(ngModel)]="newItem.featured" name="featured"></ion-toggle>
+        </ion-item>
+
+        <!-- Submit Button -->
+        <ion-button expand="full" type="submit" [disabled]="loading">Add Item</ion-button>
       </form>
     </ion-card-content>
   </ion-card>
 
-  <ion-divider></ion-divider>
+  <!-- Featured Item Filter Buttons -->
+  <ion-item>
+    <ion-label>Filter Items</ion-label>
+    <ion-button (click)="filterItems(true)" color="primary" [expand]="'block'">Show Featured Items Only</ion-button>
+    <ion-button (click)="filterItems(false)" color="secondary" [expand]="'block'">Show All Items</ion-button>
+  </ion-item>
 
+  <!-- Item List Display -->
   <ion-card>
     <ion-card-header>
-      <ion-card-title>特色物品</ion-card-title>
+      <ion-card-title>Item List</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
       <ion-list>
-        <ion-item *ngFor="let item of featuredItems">
+        <ion-item *ngFor="let item of filteredItems">
           <ion-label>{{ item.name }} - {{ item.category }}</ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
 </ion-content>
-

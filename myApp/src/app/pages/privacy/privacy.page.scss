@@ -1,0 +1,68 @@
+/* 自定义工具栏样式 */
+.custom-toolbar {
+    --background: #007bff; /* 蓝色背景 */
+    --color: white; /* 白色文字 */
+  }
+  
+  /* 数据隐私说明卡片 */
+  .privacy-card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .privacy-card ion-card-header {
+    --background: #007bff;
+    --color: white;
+    text-align: center;
+  }
+  
+  .privacy-card ion-card-content {
+    padding: 15px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  .privacy-card p {
+    margin-bottom: 10px;
+  }
+  
+  ul {
+    margin-left: 20px;
+  }
+  
+  ul li {
+    margin-bottom: 8px;
+  }
+  
+  ion-card-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ffffff;
+  }
+  
+  /* 联系方式卡片 */
+  .contact-card {
+    margin-top: 20px;
+  }
+  
+  .contact-card ion-card-header {
+    --background: #007bff;
+    --color: white;
+  }
+  
+  .contact-card ion-card-content {
+    padding: 15px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* 额外样式 */
+  .privacy-card ul li {
+    color: #555; /* 灰色文本 */
+  }
+  
+  .privacy-card p {
+    color: #333; /* 深色文本 */
+  }
+  
